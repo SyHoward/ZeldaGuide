@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeldaGuide.WebApi", "ZeldaGuide.WebApi\ZeldaGuide.WebApi.csproj", "{33971F4F-02B0-4602-AC90-1B72E7E424B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeldaGuide.Data", "ZeldaGuide.Data\ZeldaGuide.Data.csproj", "{5A1F5B96-3D6B-47FB-A127-F62BD33A928B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeldaGuide.Models", "ZeldaGuide.Models\ZeldaGuide.Models.csproj", "{6A641BD9-0212-4163-A934-E07CEAC7C849}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeldaGuide.Services", "ZeldaGuide.Services\ZeldaGuide.Services.csproj", "{12D7D1B9-1D5E-4074-BBB8-A76E0D4CE6CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33971F4F-02B0-4602-AC90-1B72E7E424B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33971F4F-02B0-4602-AC90-1B72E7E424B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33971F4F-02B0-4602-AC90-1B72E7E424B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33971F4F-02B0-4602-AC90-1B72E7E424B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1F5B96-3D6B-47FB-A127-F62BD33A928B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1F5B96-3D6B-47FB-A127-F62BD33A928B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1F5B96-3D6B-47FB-A127-F62BD33A928B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1F5B96-3D6B-47FB-A127-F62BD33A928B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A641BD9-0212-4163-A934-E07CEAC7C849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A641BD9-0212-4163-A934-E07CEAC7C849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A641BD9-0212-4163-A934-E07CEAC7C849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A641BD9-0212-4163-A934-E07CEAC7C849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D7D1B9-1D5E-4074-BBB8-A76E0D4CE6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D7D1B9-1D5E-4074-BBB8-A76E0D4CE6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D7D1B9-1D5E-4074-BBB8-A76E0D4CE6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D7D1B9-1D5E-4074-BBB8-A76E0D4CE6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
