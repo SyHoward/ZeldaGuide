@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
+using ZeldaGuide.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Add connection string and DbContext setup
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
