@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
+using ZeldaGuide.Services.MainQuest;
 using ZeldaGuide.Services.ToDo;
 using ZeldaGuide.Services.User;
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IToDoService, ToDoService>();
+builder.Services.AddScoped<IMainQuestService, MainQuestService>();
 
 //HttpContext DI
 builder.Services.AddHttpContextAccessor();
