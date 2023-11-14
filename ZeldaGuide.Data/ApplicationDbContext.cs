@@ -10,6 +10,7 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<i
         : base(options) { }
 
     public DbSet<ToDoEntity> ToDos {get; set;} = null!;
+    public DbSet<MainQuestEntity> MainQuests {get; set;} = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
