@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ZeldaGuide.Models.MainQuest;
+using ZeldaGuide.Models.User;
 using ZeldaGuide.Services.MainQuest;
 
 namespace ZeldaGuide.WebApi.Controllers;
@@ -29,5 +30,18 @@ public class MainQuestController : ControllerBase
         }
 
         return BadRequest("Main quest could not be created.");
+    }
+
+    [HttpGet("{questId:int}")]
+    public async Task<IActionResult> GetById([FromRoute] int questId)
+    {
+        MainQuestDetail? mainQuestDetail = await _mainQuestService.GetMainQuestByIdAsync(questId);
+
+        if (mainQuestDetail is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(mainQuestDetail);
     }
 }
