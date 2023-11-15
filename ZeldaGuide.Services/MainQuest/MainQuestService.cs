@@ -24,4 +24,19 @@ public class MainQuestService : IMainQuestService
 
         return numberOfChanges == 1;
     }
+
+    public async Task<MainQuestDetail?> GetMainQuestByIdAsync(int questId)
+    {
+        MainQuestEntity? entity = await _context.MainQuests.FindAsync(questId);
+        if (entity is null)
+            return null;
+        MainQuestDetail detail = new()
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Description = entity.Description
+        };
+
+        return detail;
+    }
 }
