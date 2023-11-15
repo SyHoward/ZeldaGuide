@@ -6,7 +6,7 @@ namespace ZeldaGuide.Data.Entities;
 public class ToDoEntity
 {
     [Key]
-    public int Id {get; set;}
+    public int ToDoId {get; set;}
 
     [Required]
     [ForeignKey(nameof(Owner))]
@@ -14,8 +14,9 @@ public class ToDoEntity
     public UserEntity Owner {get; set;} = null!;
 
     [Required]
-    //[ForeignKey(nameof(QuestItem))]
-    public string MainQuests {get; set;} = string.Empty;
+    [ForeignKey(nameof(Id))]
+    public int QuestId {get; set;}
+    public MainQuestEntity Id {get; set;} = null!;
     //public QuestEntity QuestItem {get; set;}
 
 }
