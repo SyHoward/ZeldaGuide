@@ -1,8 +1,8 @@
-using Locations.Services.Locations;
+using Location.Services.Location;
 
-namespace ZeldaGuide.Services.Locations;
+namespace ZeldaGuide.Services.Location;
 
-public class LocationService : ILocationsService
+public class LocationService : ILocationService
 {
     
 }

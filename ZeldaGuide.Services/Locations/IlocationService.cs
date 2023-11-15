@@ -1,7 +1,7 @@
-namespace Locations.Services.Locations;
+namespace Location.Services.Location;
 
-public interface ILocationsService
+public interface ILocationService
 {
-    Task<bool> RegisterLocationsAsync(LocationsRegister model);
-    Task<LocationsDetail?> GetLocationsByIdAsync(int Locations);
+    Task<bool> RegisterLocationsAsync(LocationRegister model);
+    Task<LocationDetail?> GetLocationsByIdAsync(int Locations);
 }

@@ -4,6 +4,7 @@ using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
 using ZeldaGuide.Services.ToDo;
 using ZeldaGuide.Services.User;
+using ZeldaGuide.Services.Location;
 
 var builder = WebApplication.CreateBuilder(args);
 
