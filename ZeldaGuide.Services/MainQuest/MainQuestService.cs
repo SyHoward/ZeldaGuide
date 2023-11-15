@@ -59,4 +59,18 @@ public class MainQuestService : IMainQuestService
         //* numberOfChanges is stated to be equal to 1 because only one row is updated
         return numberOfChanges == 1;
     }
+
+    public async Task<bool> DeleteMainQuestAsync(int questId)
+    {
+        //* Find the main quest by the given Id
+        MainQuestEntity? mainQuestEntity = await _context.MainQuests.FindAsync(questId);
+
+        //* Validate the main quest exists
+        if (mainQuestEntity is null)
+            return false;
+
+        //* Remove the main quest from the DbContext and assert that the one change was saved
+        _context.MainQuests.Remove(mainQuestEntity);
+        return await _context.SaveChangesAsync() == 1;
+    }
 }

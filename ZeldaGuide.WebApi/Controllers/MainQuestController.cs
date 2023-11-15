@@ -56,4 +56,13 @@ public class MainQuestController : ControllerBase
             ? Ok("Main quest updated successfully.")
             : BadRequest("Main quest could not be updated.");
     }
+
+    //* DELETE api/MainQuest/5
+    [HttpDelete("{questId:int}")]
+    public async Task<IActionResult> DeleteMainQuest([FromRoute] int questId)
+    {
+        return await _mainQuestService.DeleteMainQuestAsync(questId)
+            ? Ok($"Main quest {questId} was deleted successfully.")
+            : BadRequest($"Main quest {questId} could not be deleted.");
+    }
 }
