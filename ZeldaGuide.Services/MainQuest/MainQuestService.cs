@@ -39,4 +39,24 @@ public class MainQuestService : IMainQuestService
 
         return detail;
     }
+
+    public async Task<bool> UpdateMainQuestAsync(MainQuestUpdate request)
+    {
+        //* Find the main quest and validate that it exists
+        MainQuestEntity? entity = await _context.MainQuests.FindAsync(request.Id);
+
+        //* It checks if the entity under the given Id exists
+        if (entity is null)
+            return false;
+        
+        //* Now we update the entity's properties
+        entity.Name = request.Name;
+        entity.Description = request.Description;
+
+        //* Save the changes to the database and capture how many rows were updated
+        int numberOfChanges = await _context.SaveChangesAsync();
+
+        //* numberOfChanges is stated to be equal to 1 because only one row is updated
+        return numberOfChanges == 1;
+    }
 }

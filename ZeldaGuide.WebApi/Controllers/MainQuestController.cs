@@ -44,4 +44,16 @@ public class MainQuestController : ControllerBase
 
         return Ok(mainQuestDetail);
     }
+
+    //* PUT api/MainQuest
+    [HttpPut]
+    public async Task<IActionResult> UpdateMainQuestById([FromBody] MainQuestUpdate request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return await _mainQuestService.UpdateMainQuestAsync(request)
+            ? Ok("Main quest updated successfully.")
+            : BadRequest("Main quest could not be updated.");
+    }
 }
