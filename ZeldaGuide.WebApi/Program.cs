@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IToDoService, ToDoService>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 //HttpContext DI
 builder.Services.AddHttpContextAccessor();
