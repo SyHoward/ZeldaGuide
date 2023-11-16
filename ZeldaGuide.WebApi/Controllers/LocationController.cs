@@ -15,7 +15,7 @@ namespace ZeldaGuide.WebApi.Controllers;
 
     public LocationController (LocationService, ILocationService? ILocationService)
     {
-        ILocationService = locationService;
+        ILocationService = LocationService;
     }
     public async Task<IActionResult> GetLocations()
     {
