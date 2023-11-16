@@ -1,9 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ZeldaGuide.Data;
-using ZeldaGuide.Models.User;
-using ZeldaGuide.Services.Locations;
-using ZeldaGuide.Services.User;
-using Microsoft.EntityFrameworkCore;
+using ZeldaGuide.Services.Location;
 
 namespace ZeldaGuide.WebApi.Controllers;
 
@@ -12,6 +8,9 @@ namespace ZeldaGuide.WebApi.Controllers;
 public class LocationsController : ControllerBase
 {
     private readonly LocationService locationsService;
+    private readonly object id;
+    private object _context;
+
     public LocationController(LocationService)
     {
         _locationService = locationService;
@@ -36,17 +35,23 @@ public class LocationsController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult>GetLocationsById(int id)
     {
-        Location? locations = await _context.Location.Findasync(id);
+        Location? location = await _context.Location.Findasync(id);
 
-        if (locations is null)
+        if (location is null)
         {
             return NotFound();
         }
         return Ok(location);
     }
+
+    private IActionResult Ok(Location? location)
+    {
+        throw new NotImplementedException();
+    }
+
     [HttpPost]
     [Route("{id}")]
-    public async Task<IActionResult> UpdateLocations([Fromform] LocationCreate request)
+    public async Task<IActionResult> UpdateLocations([FromForm] LocationCreate request)
     {
         var oldLocation = await _context.Location.FindAsync(id);
         if (oldLocation == null)
@@ -64,4 +69,9 @@ public class LocationsController : ControllerBase
         }
         
     }
+}
+
+internal class model
+{
+    internal static readonly string? Name;
 }
