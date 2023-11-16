@@ -1,19 +1,20 @@
+using Location.Services.Location;
 using Microsoft.AspNetCore.Mvc;
 using ZeldaGuide.Services.Location;
 
 namespace ZeldaGuide.WebApi.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class LocationsController : ControllerBase
-{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class LocationsController : ControllerBase
+    {
     private readonly LocationService locationsService;
     private readonly object id;
     private object _context;
 
     public LocationController(LocationService)
     {
-        _locationService = locationService;
+        ILocationService = locationService;
     }
     public async Task<IActionResult> GetLocations()
     {
@@ -49,9 +50,9 @@ public class LocationsController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("{id}")]
-    public async Task<IActionResult> UpdateLocations([FromForm] LocationCreate request)
+    public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
     {
         var oldLocation = await _context.Location.FindAsync(id);
         if (oldLocation == null)
@@ -69,9 +70,19 @@ public class LocationsController : ControllerBase
         }
         
     }
-}
+    [HttpDelete]
+    [Route("{id}")]
 
-internal class model
-{
-    internal static readonly string? Name;
+    public async Task<IActionResult> DeleteLocation([FromRoute] int id)
+    {
+        var location = await _context.Location.FindAsync(id);
+        if (location is null)
+        {
+            return NotFound();
+        }
+
+        _context.Location.Remove(location);
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
 }
