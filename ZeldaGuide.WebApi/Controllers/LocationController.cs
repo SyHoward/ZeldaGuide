@@ -7,31 +7,42 @@ namespace ZeldaGuide.WebApi.Controllers;
     [ApiController]
     [Route("api/[controller]")]
     public class LocationsController : ControllerBase
-    {
-    private readonly LocationService locationsService;
+    
+    private readonly LocationService locationService;
     private readonly object id;
+    private readonly ILocationService locationService;
     private object _context;
 
-    public LocationController(LocationService)
+    public LocationController (LocationService, ILocationService? ILocationService)
     {
         ILocationService = locationService;
     }
     public async Task<IActionResult> GetLocations()
     {
-        List<Location> locations = await _context.Locations.ToListAsync();
+        List<Location> locations = await _context.Location.ToListAsync();
         return Ok(Location);
     }
+
+    private IActionResult Ok(object location)
+    {
+        throw new NotImplementedException();
+    }
+
     [HttpPost]
-    public async Task<IActionResult> PostLocations([FromBody] Location request)
+    public Task<IActionResult> PostLocations([FromBody] LocationDetail request, object ModelState)
     {
         if (ModelState.IsValid)
         {
-            _context.Locations.Add(request);
-            await _context.SaveChangesAsync();
-            return Ok();
+            return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
         }
-        return BadRequest(ModelState);
-    }
+            _context.Location.Addnew Location
+            Location = model.Location,
+            GetLocationsById = model.LocationId,
+        } 
+        public class LocationCreate
+        {
+        }
+    
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult>GetLocationsById(int id)
@@ -85,4 +96,4 @@ namespace ZeldaGuide.WebApi.Controllers;
         await _context.SaveChangesAsync();
         return Ok();
     }
-}
+

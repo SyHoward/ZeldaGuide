@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data.Entities;
 
 namespace ZeldaGuide.Data;
@@ -18,3 +15,4 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<i
     }
 
 }
+
