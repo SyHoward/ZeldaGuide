@@ -1,5 +1,5 @@
-using Location.Services.Location;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
 
 namespace ZeldaGuide.WebApi.Controllers;
@@ -9,8 +9,6 @@ namespace ZeldaGuide.WebApi.Controllers;
     public class LocationController : ControllerBase
     
     private readonly LocationService 
-    private object _context;
-
     public LocationController (LocationService ILocationService )
     {
         ILocationService = LocationService;
@@ -20,10 +18,7 @@ namespace ZeldaGuide.WebApi.Controllers;
         List<Location> locations = await Context.Location.ToListAsync();
         return Ok(locations);
     }
-
-
-
-ActionResult Ok(List<LocationService> locations)
+    ActionResult Ok(List<LocationService> locations)
     {
     throw new NotImplementedException();
     }
