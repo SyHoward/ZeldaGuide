@@ -23,7 +23,7 @@ namespace ZeldaGuide.WebApi.Controllers;
 
 
 
-ActionResult Ok(List<Location> locations)
+ActionResult Ok(List<LocationService> locations)
     {
     throw new NotImplementedException();
     }
@@ -43,8 +43,14 @@ ActionResult Ok(List<Location> locations)
             Context.Location.Addnew Location
             Location = model.Location,
             GetLocationsById = model.LocationId,
-        } 
-        public class LocationCreate
+        }
+
+IActionResult BadRequestResult(object modelState)
+{
+    throw new NotImplementedException();
+}
+
+public class LocationCreate
         {
         }
     
@@ -101,4 +107,3 @@ ActionResult Ok(List<Location> locations)
         await Context.SaveChangesAsync();
         return Ok();
     }
-
