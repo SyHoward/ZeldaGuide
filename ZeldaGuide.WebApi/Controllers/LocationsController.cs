@@ -6,7 +6,7 @@ namespace ZeldaGuide.WebApi.Controllers;
 
     [ApiController]
     [Route("api/[controller]")]
-    public class LocationsController : ControllerBase
+    public class LocationController : ControllerBase
     
     private readonly LocationService 
     private object _context;
@@ -17,11 +17,13 @@ namespace ZeldaGuide.WebApi.Controllers;
     }
     public async Task<IActionResult> GetLocation()
     {
-        List<Location> locations = await _context.Location.ToListAsync();
+        List<Location> locations = await Context.Location.ToListAsync();
         return Ok(locations);
     }
 
-    ActionResult Ok(List<Location> locations)
+
+
+ActionResult Ok(List<Location> locations)
     {
     throw new NotImplementedException();
     }
@@ -38,7 +40,7 @@ namespace ZeldaGuide.WebApi.Controllers;
         {
             return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
         }
-            _context.Location.Addnew Location
+            Context.Location.Addnew Location
             Location = model.Location,
             GetLocationsById = model.LocationId,
         } 
@@ -50,7 +52,7 @@ namespace ZeldaGuide.WebApi.Controllers;
     [HttpGet("{id:int}")]
     public async Task<IActionResult>GetLocationsById(int id)
     {
-        Location? location = await _context.Location.Findasync(id);
+        Location? location = await Context.Location.Findasync(id);
 
         if (location is null)
         {
@@ -68,7 +70,7 @@ namespace ZeldaGuide.WebApi.Controllers;
     [Route("{id}")]
     public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
     {
-        var oldLocation = await _context.Location.FindAsync(id);
+        var oldLocation = await Context.Location.FindAsync(id);
         if (oldLocation == null)
         {
             return NotFound();
@@ -89,14 +91,14 @@ namespace ZeldaGuide.WebApi.Controllers;
 
     public async Task<IActionResult> DeleteLocation([FromRoute] int id)
     {
-        var location = await _context.Location.FindAsync(id);
+        var location = await Context.Location.FindAsync(id);
         if (location is null)
         {
             return NotFound();
         }
 
-        _context.Location.Remove(location);
-        await _context.SaveChangesAsync();
+        Context.Location.Remove(location);
+        await Context.SaveChangesAsync();
         return Ok();
     }
 
