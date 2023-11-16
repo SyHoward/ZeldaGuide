@@ -9,7 +9,6 @@ namespace ZeldaGuide.WebApi.Controllers;
     public class LocationsController : ControllerBase
     
     private readonly LocationService 
-    private readonly ILocationService locationService;
     private object _context;
 
     public LocationController (LocationService ILocationService )
