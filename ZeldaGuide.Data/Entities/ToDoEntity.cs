@@ -9,9 +9,9 @@ public class ToDoEntity
     public int ToDoId {get; set;}
 
     [Required]
-    [ForeignKey(nameof(Owner))]
-    public int OwnerId {get; set;}
-    public UserEntity Owner {get; set;} = null!;
+    [ForeignKey(nameof(OwnerId))]
+    public int Owner {get; set;}
+    public UserEntity OwnerId {get; set;} = null!;
 
     [Required]
     [ForeignKey(nameof(Id))]

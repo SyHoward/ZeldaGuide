@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data;
@@ -28,6 +29,7 @@ public class ToDoService : IToDoService
     {
         ToDoEntity entity = new()
         {
+            Owner = _userId,
             QuestId = request.QuestId
         };
 
@@ -49,7 +51,7 @@ public class ToDoService : IToDoService
     public async Task<IEnumerable<ToDoListItem>> GetAllToDoAsync()
     {
         List<ToDoListItem> toDos = await _dbContext.ToDos
-            .Where(entity => entity.OwnerId == _userId)
+            .Where(entity => entity.Owner == _userId)
             .Select(entity => new ToDoListItem
             {
                 ToDoId = entity.ToDoId,

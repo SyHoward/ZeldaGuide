@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeldaGuide.Data;
 
@@ -11,9 +12,11 @@ using ZeldaGuide.Data;
 namespace ZeldaGuide.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231115225531_LocationTable")]
+    partial class LocationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,7 +193,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
-                    b.Property<int>("Owner")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestId")
@@ -198,7 +201,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     b.HasKey("ToDoId");
 
-                    b.HasIndex("Owner");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("QuestId");
 
@@ -337,9 +340,9 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
-                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "OwnerId")
+                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "Owner")
                         .WithMany()
-                        .HasForeignKey("Owner")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -351,7 +354,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     b.Navigation("Id");
 
-                    b.Navigation("OwnerId");
+                    b.Navigation("Owner");
                 });
 #pragma warning restore 612, 618
         }
