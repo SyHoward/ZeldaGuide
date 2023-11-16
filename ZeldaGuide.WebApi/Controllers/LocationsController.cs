@@ -7,26 +7,26 @@ namespace ZeldaGuide.WebApi.Controllers;
     [ApiController]
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
-    
-    private readonly LocationService 
-    public LocationController (LocationService ILocationService )
     {
+        private readonly LocationService 
+        public LocationController (LocationService ILocationService )
+        {
         ILocationService = LocationService;
-    }
-    public async Task<IActionResult> GetLocation()
-    {
+        }
+        public async Task<IActionResult> GetLocation()
+        {
         List<Location> locations = await Context.Location.ToListAsync();
         return Ok(locations);
-    }
-    ActionResult Ok(List<LocationService> locations)
-    {
-    throw new NotImplementedException();
-    }
-
-    private IActionResult Ok(object location)
-    {
+        }
+        ActionResult Ok(List<LocationService> locations)
+        {
         throw new NotImplementedException();
-    }
+        }
+
+        private IActionResult Ok(object location)
+        {
+        throw new NotImplementedException();
+        }
 
     [HttpPost]
     public Task<IActionResult> PostLocations([FromBody] LocationDetail request, object ModelState)
@@ -102,3 +102,4 @@ public class LocationCreate
         await Context.SaveChangesAsync();
         return Ok();
     }
+}
