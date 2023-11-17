@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
+using Microsoft.EntityFrameworkCore;
 
 namespace ZeldaGuide.WebApi.Controllers;
 
@@ -8,7 +9,10 @@ namespace ZeldaGuide.WebApi.Controllers;
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
     {
-        private readonly LocationService 
+    private object _locationService;
+    private readonly List<LocationService> location;
+
+    private readonly LocationService 
         public LocationController (LocationService ILocationService )
         {
         ILocationService = LocationService;
@@ -51,21 +55,12 @@ public class LocationCreate
     
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult>GetLocationsById(int id)
+    public async Task<IActionResult> GetAllLocation()
     {
-        Location? location = await Context.Location.Findasync(id);
-
-        if (location is null)
-        {
-            return NotFound();
-        }
+        var toDos = await _locationService.GetAllLocationAsync()
         return Ok(location);
     }
-
-    private IActionResult Ok(Location? location)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     [HttpPut]
     [Route("{id}")]
