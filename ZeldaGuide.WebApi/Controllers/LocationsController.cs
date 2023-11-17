@@ -29,7 +29,7 @@ namespace ZeldaGuide.WebApi.Controllers;
         }
 
     [HttpPost]
-    public Task<IActionResult> PostLocations([FromBody] LocationDetail request, object ModelState)
+    public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState)
     {
         if (ModelState.IsValid)
         {
@@ -37,7 +37,7 @@ namespace ZeldaGuide.WebApi.Controllers;
         }
             Context.Location.Addnew Location
             Location = model.Location,
-            GetLocationsById = model.LocationId,
+            GetLocationById = model.LocationId,
         }
 
 IActionResult BadRequestResult(object modelState)
