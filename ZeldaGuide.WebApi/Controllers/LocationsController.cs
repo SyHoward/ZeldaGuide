@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
 using Microsoft.EntityFrameworkCore;
+using Location.Services.Location;
 
 namespace ZeldaGuide.WebApi.Controllers;
     
@@ -11,9 +12,11 @@ namespace ZeldaGuide.WebApi.Controllers;
 {
     private readonly LocationService _locationService;
 
-    public LocationController(LocationService toDoService)
+    public object context { get; private set; }
+
+    public LocationController(LocationService LocationService)
     {
-        _locationService = toDoService;
+        _locationService = LocationService;
     }
 
     [HttpPost]
@@ -41,16 +44,21 @@ public class LocationCreate
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAllLocation()
     {
-        var toDos = await _locationService.GetAllLocationAsync()
+        var location = await _locationService
+        GetAllLocationAsync();
         return Ok(location);
     }
-    
+
+    private void GetAllLocationAsync()
+    {
+        throw new NotImplementedException();
+    }
 
     [HttpPut]
     [Route("{id}")]
     public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
     {
-        var oldLocation = await Context.Location.FindAsync(id);
+        var oldLocation = await context.Location.FindAsync(id);
         if (oldLocation == null)
         {
             return NotFound();
@@ -71,14 +79,14 @@ public class LocationCreate
 
     public async Task<IActionResult> DeleteLocation([FromRoute] int id)
     {
-        var location = await Context.Location.FindAsync(id);
+        var location = await context.Location.FindAsync(id);
         if (location is null)
         {
             return NotFound();
         }
 
-        Context.Location.Remove(location);
-        await Context.SaveChangesAsync();
+        context.Location.Remove(location);
+        await context.SaveChangesAsync();
         return Ok();
     }
 }
