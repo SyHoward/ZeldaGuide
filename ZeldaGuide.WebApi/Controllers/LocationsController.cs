@@ -4,33 +4,17 @@ using ZeldaGuide.Services.Location;
 using Microsoft.EntityFrameworkCore;
 
 namespace ZeldaGuide.WebApi.Controllers;
-
+    
     [ApiController]
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
+{
+    private readonly LocationService _locationService;
+
+    public LocationController(LocationService toDoService)
     {
-    private object _locationService;
-    private readonly List<LocationService> location;
-
-    private readonly LocationService 
-        public LocationController (LocationService ILocationService )
-        {
-        ILocationService = LocationService;
-        }
-        public async Task<IActionResult> GetLocation()
-        {
-        List<Location> locations = await Context.Location.ToListAsync();
-        return Ok(locations);
-        }
-        ActionResult Ok(List<LocationService> locations)
-        {
-        throw new NotImplementedException();
-        }
-
-        private IActionResult Ok(object location)
-        {
-        throw new NotImplementedException();
-        }
+        _locationService = toDoService;
+    }
 
     [HttpPost]
     public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState)
