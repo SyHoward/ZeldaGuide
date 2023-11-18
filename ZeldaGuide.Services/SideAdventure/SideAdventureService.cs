@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
 using ZeldaGuide.Models.SideAdventure;
@@ -39,5 +40,18 @@ public class SideAdventureService : ISideAdventureService
         };
 
         return detail;
+    }
+
+    public async Task<IEnumerable<SideAdventureListItem>> GetAllSideAdventuresAsync()
+    {
+        List<SideAdventureListItem> sideAdventures = await _dbContext.SideAdventures
+            .Select(entity => new SideAdventureListItem
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            })
+            .ToListAsync();
+
+        return sideAdventures;
     }
 }

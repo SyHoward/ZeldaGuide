@@ -42,4 +42,12 @@ public class SideAdventureController : ControllerBase
 
         return Ok(sideAdventureDetail);
     }
+
+    //* GET api/SideAdventure
+    [HttpGet]
+    public async Task<IActionResult> GetAllSideAdventures()
+    {
+        var sideAdventures = await _sideAdventureService.GetAllSideAdventuresAsync();
+        return Ok(sideAdventures);
+    }
 }
