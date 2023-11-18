@@ -54,4 +54,24 @@ public class SideAdventureService : ISideAdventureService
 
         return sideAdventures;
     }
+
+    public async Task<bool> UpdateSideAdventureAsync(SideAdventureUpdate request)
+    {
+        //* Find the side adventure and validate that it exists
+        SideAdventureEntity? entity = await _dbContext.SideAdventures.FindAsync(request.Id);
+
+        //* It checks if the entity under the given Id exists
+        if (entity is null)
+            return false;
+        
+        //* Now we update the entity's properties
+        entity.Name = request.Name;
+        entity.Description = request.Description;
+
+        //* Save the changes to the database and capture how many rows were updated
+        int numberOfChanges = await _dbContext.SaveChangesAsync();
+
+        //* numberOfChanges is stated to be equal to 1 because only one row is updated
+        return numberOfChanges == 1;
+    }
 }

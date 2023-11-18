@@ -50,4 +50,16 @@ public class SideAdventureController : ControllerBase
         var sideAdventures = await _sideAdventureService.GetAllSideAdventuresAsync();
         return Ok(sideAdventures);
     }
+
+    //* PUT api/SideAdventure
+    [HttpPut]
+    public async Task<IActionResult> UpdateSideAdventureById([FromBody] SideAdventureUpdate request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return await _sideAdventureService.UpdateSideAdventureAsync(request)
+            ? Ok("Side adventure updated successfully.")
+            : BadRequest("Side adventure could not be updated.");
+    }
 }
