@@ -74,4 +74,18 @@ public class SideAdventureService : ISideAdventureService
         //* numberOfChanges is stated to be equal to 1 because only one row is updated
         return numberOfChanges == 1;
     }
+
+    public async Task<bool> DeleteSideAdventureAsync(int sideAdventureId)
+    {
+        //* Find the side adventure by the given Id
+        SideAdventureEntity? sideAdventureEntity = await _dbContext.SideAdventures.FindAsync(sideAdventureId);
+
+        //* Validate the side adventure exists
+        if (sideAdventureEntity is null)
+            return false;
+
+        //* Remove the side adventure from the DbContext and assert that the one change was saved
+        _dbContext.SideAdventures.Remove(sideAdventureEntity);
+        return await _dbContext.SaveChangesAsync() == 1;
+    }
 }

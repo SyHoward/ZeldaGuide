@@ -62,4 +62,13 @@ public class SideAdventureController : ControllerBase
             ? Ok("Side adventure updated successfully.")
             : BadRequest("Side adventure could not be updated.");
     }
+
+    //* DELETE api/SideAdventure/5
+    [HttpDelete("{sideAdventureId:int}")]
+    public async Task<IActionResult> DeleteSideAdventure([FromRoute] int sideAdventureId)
+    {
+        return await _sideAdventureService.DeleteSideAdventureAsync(sideAdventureId)
+            ? Ok($"Side adventure {sideAdventureId} was deleted successfully.")
+            : BadRequest($"Side adventure {sideAdventureId} could not be deleted.");
+    }
 }

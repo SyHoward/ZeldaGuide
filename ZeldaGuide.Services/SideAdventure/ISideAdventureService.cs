@@ -6,4 +6,5 @@ public interface ISideAdventureService
     Task<SideAdventureDetail?> GetSideAdventureByIdAsync(int sideAdventureId);
     Task<IEnumerable<SideAdventureListItem>> GetAllSideAdventuresAsync();
     Task<bool> UpdateSideAdventureAsync(SideAdventureUpdate request);
+    Task<bool> DeleteSideAdventureAsync(int sideAdventureId);
 }
