@@ -24,14 +24,36 @@ public class ToDoService : IToDoService
         _dbContext = dbContext;
     }
 
+    public async Task<ToDoListItem?> CreateToDoAsync(ToDoCreate request)
+    {
+        ToDoEntity entity = new()
+        {
+            QuestId = request.QuestId
+        };
+
+        _dbContext.ToDos.Add(entity);
+        var numberOfChanges = await _dbContext.SaveChangesAsync();
+
+        if (numberOfChanges != 1)
+            return null;
+
+        ToDoListItem response = new()
+        {
+            ToDoId = entity.ToDoId,
+            QuestId = entity.QuestId
+        };
+        return response;
+    }
+
+
     public async Task<IEnumerable<ToDoListItem>> GetAllToDoAsync()
     {
         List<ToDoListItem> toDos = await _dbContext.ToDos
             .Where(entity => entity.OwnerId == _userId)
             .Select(entity => new ToDoListItem
             {
-                Id = entity.Id,
-                MainQuests = entity.MainQuests
+                ToDoId = entity.ToDoId,
+                QuestId = entity.QuestId
             })
             .ToListAsync();
 

@@ -4,5 +4,6 @@ namespace ZeldaGuide.Services.ToDo;
 
 public interface IToDoService
 {
+    Task<ToDoListItem?> CreateToDoAsync(ToDoCreate request);
     Task<IEnumerable<ToDoListItem>> GetAllToDoAsync();
 }
