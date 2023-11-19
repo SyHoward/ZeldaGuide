@@ -19,21 +19,6 @@ public class UserController : ControllerBase
         _tokenService = tokenService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateLocations([FromBody] UserRegister request)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-            
-        var response = await _UserService.CreateUser;
-        {
-            TextResponse response = new("User was registered.");
-            return Ok(response);
-        }
-
-        return BadRequest(new TextResponse("User could not be registered."));
-    }
-
     [HttpGet("{userId:int}")]
     public async Task<IActionResult> GetById([FromRoute] int userId)
     {
