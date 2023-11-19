@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
 using Microsoft.EntityFrameworkCore;
 using Location.Services.Location;
-using System;
+
 
 namespace ZeldaGuide.WebApi.Controllers;
     
@@ -37,10 +37,7 @@ IActionResult BadRequestResult(object modelState)
     throw new NotImplementedException();
 }
 
-public class LocationCreate
-        {
-        }
-    
+
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAllLocation()
@@ -92,6 +89,3 @@ public class LocationCreate
     }
 }
 
-internal class model
-{
-}
