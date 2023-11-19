@@ -11,6 +11,7 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<i
 
     public DbSet<ToDoEntity> ToDos {get; set;} = null!;
     public DbSet<MainQuestEntity> MainQuests {get; set;} = null!;
+    public DbSet<SideAdventureEntity> SideAdventures {get; set;} = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

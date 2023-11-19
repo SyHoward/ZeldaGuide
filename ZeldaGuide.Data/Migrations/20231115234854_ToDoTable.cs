@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ZeldaGuide.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MainQuestTable : Migration
+    public partial class ToDoTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

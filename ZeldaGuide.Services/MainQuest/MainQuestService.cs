@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
 using ZeldaGuide.Models.MainQuest;
@@ -38,6 +39,19 @@ public class MainQuestService : IMainQuestService
         };
 
         return detail;
+    }
+
+    public async Task<IEnumerable<MainQuestListItem>> GetAllMainQuestsAsync()
+    {
+        List<MainQuestListItem> quests = await _context.MainQuests
+            .Select(entity => new MainQuestListItem
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            })
+            .ToListAsync();
+
+        return quests;
     }
 
     public async Task<bool> UpdateMainQuestAsync(MainQuestUpdate request)

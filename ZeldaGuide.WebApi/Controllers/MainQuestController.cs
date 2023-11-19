@@ -45,6 +45,14 @@ public class MainQuestController : ControllerBase
         return Ok(mainQuestDetail);
     }
 
+    //* GET api/MainQuest
+    [HttpGet]
+    public async Task<IActionResult> GetAllMainQuests()
+    {
+        var quests = await _mainQuestService.GetAllMainQuestsAsync();
+        return Ok(quests);
+    }
+
     //* PUT api/MainQuest
     [HttpPut]
     public async Task<IActionResult> UpdateMainQuestById([FromBody] MainQuestUpdate request)
