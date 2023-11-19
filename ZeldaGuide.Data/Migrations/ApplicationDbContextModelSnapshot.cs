@@ -159,7 +159,7 @@ namespace ZeldaGuide.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
+            modelBuilder.Entity("ZeldaGuide.Data.Entities.MainQuestEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,16 +167,63 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("MainQuests")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MainQuests");
+                });
+
+            modelBuilder.Entity("ZeldaGuide.Data.Entities.SideAdventureEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SideAdventures");
+                });
+
+            modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
+                {
+                    b.Property<int>("ToDoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("QuestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ToDoId");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("QuestId");
 
                     b.ToTable("ToDos");
                 });
@@ -318,6 +365,14 @@ namespace ZeldaGuide.Data.Migrations
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Id")
+                        .WithMany()
+                        .HasForeignKey("QuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Id");
 
                     b.Navigation("Owner");
                 });
