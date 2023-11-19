@@ -5,8 +5,10 @@ using Microsoft.IdentityModel.Tokens;
 using ZeldaGuide.Data;
 using ZeldaGuide.Data.Entities;
 using ZeldaGuide.Services.MainQuest;
+using ZeldaGuide.Services.SideAdventure;
 using ZeldaGuide.Services.ToDo;
 using ZeldaGuide.Services.User;
+using ZeldaGuide.Services.Location;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ZeldaGuide.Services.Token;
 using NuGet.Common;
@@ -18,6 +20,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IToDoService, ToDoService>();
 builder.Services.AddScoped<IMainQuestService, MainQuestService>();
+builder.Services.AddScoped<ISideAdventureService, SideAdventureService>();
+builder.Services.AddScoped<ILocationService, LocationService>();
+
 
 //HttpContext DI
 builder.Services.AddHttpContextAccessor();
