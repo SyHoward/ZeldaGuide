@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using ZeldaGuide.Data.Entities;
 
 namespace ZeldaGuide.Data;
@@ -11,6 +8,7 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<i
 
     public DbSet<ToDoEntity> ToDos {get; set;} = null!;
     public DbSet<MainQuestEntity> MainQuests {get; set;} = null!;
+    public DbSet<SideAdventureEntity> SideAdventures {get; set;} = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -19,3 +17,4 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<i
     }
 
 }
+

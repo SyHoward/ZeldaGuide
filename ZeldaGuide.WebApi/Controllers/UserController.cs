@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ZeldaGuide.Models.Responses;
+using ZeldaGuide.Models.Token;
 using ZeldaGuide.Models.User;
+using ZeldaGuide.Services.Token;
 using ZeldaGuide.Services.User;
 
 namespace ZeldaGuide.WebApi.Controllers;
@@ -10,21 +12,20 @@ namespace ZeldaGuide.WebApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    public UserController(IUserService userService)
+    private readonly ITokenService _tokenService;
+    public UserController(IUserService userService, ITokenService tokenService)
     {
         _userService = userService;
+        _tokenService = tokenService;
     }
 
-    [HttpPost("Register")]
-    public async Task<IActionResult> RegisterUser([FromBody] UserRegister model)
+    [HttpPost]
+    public async Task<IActionResult> CreateLocations([FromBody] UserRegister request)
     {
         if (!ModelState.IsValid)
-        {
             return BadRequest(ModelState);
-        }
-
-        var registerResult = await _userService.RegisterUserAsync(model);
-        if (registerResult)
+            
+        var response = await _UserService.CreateUser;
         {
             TextResponse response = new("User was registered.");
             return Ok(response);
@@ -45,4 +46,19 @@ public class UserController : ControllerBase
 
         return Ok(detail);
     }
+
+    [HttpPost("~/api/Token")]
+    public async Task<IActionResult> GetToken([FromBody] TokenRequest request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+            TokenResponse? response = await _tokenService.GetTokenAsync(request);
+
+            if (response is null)
+                return BadRequest(new TextResponse("Invalid username or password."));
+            
+            return Ok(response);
+    }
 }
+

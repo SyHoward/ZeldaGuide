@@ -12,8 +12,8 @@ using ZeldaGuide.Data;
 namespace ZeldaGuide.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231115014949_MainQuestTable")]
-    partial class MainQuestTable
+    [Migration("20231116010015_SideAdventureTable")]
+    partial class SideAdventureTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,6 +183,29 @@ namespace ZeldaGuide.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MainQuests");
+                });
+
+            modelBuilder.Entity("ZeldaGuide.Data.Entities.SideAdventureEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SideAdventures");
                 });
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
