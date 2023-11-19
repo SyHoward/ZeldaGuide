@@ -15,16 +15,13 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("Register")]
-    public async Task<IActionResult> RegisterUser([FromBody] UserRegister model)
+    [HttpPost]
+    public async Task<IActionResult> CreateLocations([FromBody] UserRegister request)
     {
         if (!ModelState.IsValid)
-        {
             return BadRequest(ModelState);
-        }
-
-        var registerResult = await _userService.RegisterUserAsync(model);
-        if (registerResult)
+            
+        var response = await _UserService.CreateUser;
         {
             TextResponse response = new("User was registered.");
             return Ok(response);
