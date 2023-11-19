@@ -12,8 +12,8 @@ using ZeldaGuide.Data;
 namespace ZeldaGuide.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231115225531_LocationTable")]
-    partial class LocationTable
+    [Migration("20231119165253_TokenMigrate")]
+    partial class TokenMigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,7 +193,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int>("Owner")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestId")
@@ -201,7 +201,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     b.HasKey("ToDoId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("Owner");
 
                     b.HasIndex("QuestId");
 
@@ -340,9 +340,9 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
-                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "Owner")
+                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "OwnerId")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("Owner")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -354,7 +354,7 @@ namespace ZeldaGuide.Data.Migrations
 
                     b.Navigation("Id");
 
-                    b.Navigation("Owner");
+                    b.Navigation("OwnerId");
                 });
 #pragma warning restore 612, 618
         }

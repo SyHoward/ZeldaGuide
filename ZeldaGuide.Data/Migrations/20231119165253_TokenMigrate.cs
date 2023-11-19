@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ZeldaGuide.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MainQuestTable : Migration
+    public partial class TokenMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -181,7 +181,7 @@ namespace ZeldaGuide.Data.Migrations
                 {
                     ToDoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
+                    Owner = table.Column<int>(type: "int", nullable: false),
                     QuestId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -194,8 +194,8 @@ namespace ZeldaGuide.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ToDos_Users_OwnerId",
-                        column: x => x.OwnerId,
+                        name: "FK_ToDos_Users_Owner",
+                        column: x => x.Owner,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -229,9 +229,9 @@ namespace ZeldaGuide.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ToDos_OwnerId",
+                name: "IX_ToDos_Owner",
                 table: "ToDos",
-                column: "OwnerId");
+                column: "Owner");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ToDos_QuestId",

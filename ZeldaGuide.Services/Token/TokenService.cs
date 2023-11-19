@@ -32,16 +32,16 @@ public class TokenService : ITokenService
 
     private async Task<UserEntity?> GetValidUserAsync(TokenRequest model)
     {
-        var UserEntity = await _userManager.FindByNameAsync(model.UserName);
+        var userEntity = await _userManager.FindByNameAsync(model.UserName);
 
-        if (UserEntity is null)
+        if (userEntity is null)
             return null;
 
-        var isValidPassword = await _userManager.CheckPasswordAsync(UserEntity, model.Password);
+        var isValidPassword = await _userManager.CheckPasswordAsync(userEntity, model.Password);
         if (isValidPassword == false)
             return null;
 
-        return UserEntity;
+        return userEntity;
     }
 
     private async Task<TokenResponse> GenerateTokenAsync(UserEntity entity)
@@ -71,6 +71,12 @@ public class TokenService : ITokenService
             new Claim(ClaimTypes.Name, entity.UserName!),
             new Claim(ClaimTypes.Email, entity.Email!)
         };
+
+        var roles = await _userManager.GetRolesAsync(entity);
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         return claims;
     }
