@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
 using Microsoft.EntityFrameworkCore;
 using Location.Services.Location;
+using System;
 
 namespace ZeldaGuide.WebApi.Controllers;
     
@@ -20,13 +21,13 @@ namespace ZeldaGuide.WebApi.Controllers;
     }
 
     [HttpPost]
-    public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState)
+    public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState, object GetLocationById)
     {
         if (ModelState.IsValid)
         {
             return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
         }
-            Context.Location.Addnew Location
+            Context.Location.Addnew Location;
             Location = model.Location,
             GetLocationById = model.LocationId,
         }
@@ -89,4 +90,8 @@ public class LocationCreate
         await context.SaveChangesAsync();
         return Ok();
     }
+}
+
+internal class model
+{
 }
