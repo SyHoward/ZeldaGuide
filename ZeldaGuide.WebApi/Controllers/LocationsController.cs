@@ -28,8 +28,8 @@ namespace ZeldaGuide.WebApi.Controllers;
             return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
         }
             Context.Location.Addnew Location;
-            Location = model.Location,
-            GetLocationById = model.LocationId,
+            Location = model.Location;
+            GetLocationById = model.LocationId;
         }
 
 IActionResult BadRequestResult(object modelState)
@@ -89,3 +89,6 @@ IActionResult BadRequestResult(object modelState)
     }
 }
 
+internal class model
+{
+}
