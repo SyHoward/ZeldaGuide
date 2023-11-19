@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ZeldaGuide.Models.Responses;
 using ZeldaGuide.Models.Token;
 using ZeldaGuide.Models.User;
@@ -17,6 +18,24 @@ public class UserController : ControllerBase
     {
         _userService = userService;
         _tokenService = tokenService;
+    }
+
+    [HttpPost("Register")]
+    public async Task<IActionResult> RegisterUser([FromBody] UserRegister model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var registerResult = await _userService.RegisterUserAsync(model);
+        if (registerResult)
+        {
+            TextResponse response = new("User was registered.");
+            return Ok(response);
+        }
+
+        return BadRequest(new TextResponse("User could not be registered."));
     }
 
     [HttpGet("{userId:int}")]

@@ -11,7 +11,7 @@ using ZeldaGuide.Services.User;
 using ZeldaGuide.Services.Location;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ZeldaGuide.Services.Token;
-using NuGet.Common;
+using static ZeldaGuide.Services.Location.Services.Location;
 
 var builder = WebApplication.CreateBuilder(args);
 
