@@ -89,6 +89,3 @@ IActionResult BadRequestResult(object modelState)
     }
 }
 
-internal class model
-{
-}
