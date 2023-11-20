@@ -2,14 +2,14 @@ namespace Location.Services.Location;
 
 public interface ILocationService
 {
-    Task<bool> CreateMainQuestAsync(LocationCreate model);
-    Task<LocationDetail?> GetMainQuestByIdAsync(int questId);
-    Task<IEnumerable<LocationListItem>> GetAllMainQuestsAsync();
-    Task<bool> UpdateMainQuestAsync(LocationUpdate request);
-    Task<bool> DeleteMainQuestAsync(int questId);
+    Task<bool> CreateLocationAsync(ZeldaGuide.Models.Location.LocationCreate model);
+    Task<LocationDetail?> GetLocationByIdAsync(int questId);
+    Task<IEnumerable<LocationListItem> GetLocationByAsync();
+    Task<bool> UpdateLocationAsync(LocationUpdate request);
+    Task<bool> DeleteLocationAsync(int questId);
 }
 
-public class LocationCreate
+internal class LocationListItem
 {
 }
 
@@ -17,14 +17,6 @@ public class LocationUpdate
 {
 }
 
-public class LocationListItem
-{
-}
-
-public class LocationDetail
-{
-}
-
-public class LocationRegister
+internal class Task<T1, T2>
 {
 }
