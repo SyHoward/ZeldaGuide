@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 using ZeldaGuide.Services.Location;
+using ZeldaGuide.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using Location.Services.Location;
 
@@ -42,7 +42,7 @@ IActionResult BadRequestResult(object modelState)
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAllLocation()
     {
-        var location = await _locationService
+        var location = await _LocationService
         GetAllLocationAsync();
         return Ok(location);
     }
