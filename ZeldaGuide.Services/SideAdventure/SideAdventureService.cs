@@ -34,7 +34,7 @@ public class SideAdventureService : ISideAdventureService
             return null;
         SideAdventureDetail detail = new()
         {
-            Id = entity.Id,
+            Id = entity.AdventureId,
             Name = entity.Name,
             Description = entity.Description
         };
@@ -47,7 +47,7 @@ public class SideAdventureService : ISideAdventureService
         List<SideAdventureListItem> sideAdventures = await _dbContext.SideAdventures
             .Select(entity => new SideAdventureListItem
             {
-                Id = entity.Id,
+                AdventureId = entity.AdventureId,
                 Name = entity.Name
             })
             .ToListAsync();

@@ -29,7 +29,7 @@ public class ToDoController : ControllerBase
         if (response is not null)
             return Ok(response);
 
-        return BadRequest(new TextResponse("Could not create note."));
+        return BadRequest(new TextResponse("Could not create ToDo."));
     }
 
     //GET  api/ToDo

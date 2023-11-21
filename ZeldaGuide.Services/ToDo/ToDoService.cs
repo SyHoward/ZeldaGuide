@@ -22,6 +22,8 @@ public class ToDoService : IToDoService
         var hasValidId = int.TryParse(userIdClaim, out _userId);
 
         if (hasValidId == false)
+            throw new Exception("Attempted to build ToDoService without Id claim.");
+
         _dbContext = dbContext;
     }
 
@@ -30,10 +32,11 @@ public class ToDoService : IToDoService
         ToDoEntity entity = new()
         {
             Owner = _userId,
-            QuestId = request.QuestId
+            QuestId = request.NewQuestId
         };
 
         _dbContext.ToDos.Add(entity);
+        
         var numberOfChanges = await _dbContext.SaveChangesAsync();
 
         if (numberOfChanges != 1)
@@ -46,7 +49,6 @@ public class ToDoService : IToDoService
         };
         return response;
     }
-
 
     public async Task<IEnumerable<ToDoListItem>> GetAllToDoAsync()
     {
