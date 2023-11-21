@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ZeldaGuide.Services.Location;
 using ZeldaGuide.Models.Location;
-using Microsoft.EntityFrameworkCore;
-using Location.Services.Location;
+
+
 
 
 namespace ZeldaGuide.WebApi.Controllers;
@@ -21,7 +21,7 @@ namespace ZeldaGuide.WebApi.Controllers;
     }
 
     [HttpPost]
-    public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState, object GetLocationById)
+    public Task<IActionResult> CreateLocation([FromBody] LocationDetail request, object ModelState, object GetLocationById)
     {
         if (ModelState.IsValid)
         {
@@ -89,3 +89,6 @@ IActionResult BadRequestResult(object modelState)
     }
 }
 
+public class LocationDetail
+{
+}

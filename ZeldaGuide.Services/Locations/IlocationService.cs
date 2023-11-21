@@ -9,14 +9,3 @@ public interface ILocationService
     Task<bool> DeleteLocationAsync(int questId);
 }
 
-internal class LocationListItem
-{
-}
-
-public class LocationUpdate
-{
-}
-
-internal class Task<T1, T2>
-{
-}
