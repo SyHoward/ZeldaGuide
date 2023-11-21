@@ -1,11 +1,8 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
-
 namespace ZeldaGuide.Models.ToDo;
 
-public class ToDoListItem
+public class ToDoDetail
 {
     public int ToDoId {get; set;}
+    public int Owner {get; set;}
     public int QuestId {get; set;}
-
 }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ZeldaGuide.Models.Responses;
 using ZeldaGuide.Models.Token;
 using ZeldaGuide.Models.User;

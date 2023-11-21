@@ -11,7 +11,7 @@ using ZeldaGuide.Services.User;
 using ZeldaGuide.Services.Location;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ZeldaGuide.Services.Token;
-using static ZeldaGuide.Services.Location.Services.Location;
+// using static ZeldaGuide.Services.Location.Services.Location;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +21,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IToDoService, ToDoService>();
 builder.Services.AddScoped<IMainQuestService, MainQuestService>();
 builder.Services.AddScoped<ISideAdventureService, SideAdventureService>();
-builder.Services.AddScoped<ILocationService, LocationService>();
+// builder.Services.AddScoped<ILocationService, LocationService>();
 
 
 //HttpContext DI

@@ -1,6 +1,6 @@
 namespace ZeldaGuide.Models.SideAdventure;
 public class SideAdventureListItem
 {
-    public int Id {get; set;}
+    public int AdventureId {get; set;}
     public string Name {get; set;} = string.Empty;
 }

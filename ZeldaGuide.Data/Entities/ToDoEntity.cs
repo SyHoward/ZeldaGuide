@@ -9,14 +9,13 @@ public class ToDoEntity
     public int ToDoId {get; set;}
 
     [Required]
-    [ForeignKey(nameof(OwnerId))]
+    [ForeignKey(nameof(User))]
     public int Owner {get; set;}
-    public UserEntity OwnerId {get; set;} = null!;
+    public virtual UserEntity User {get; set;}
 
     [Required]
-    [ForeignKey(nameof(Id))]
+    [ForeignKey(nameof(Quest))]
     public int QuestId {get; set;}
-    public MainQuestEntity Id {get; set;} = null!;
-    //public QuestEntity QuestItem {get; set;}
+    public virtual MainQuestEntity Quest {get; set;}
 
 }
