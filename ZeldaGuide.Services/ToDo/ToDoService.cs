@@ -78,4 +78,19 @@ public class ToDoService : IToDoService
         };
     }
 
+    public async Task<bool> UpdateToDoAsync(ToDoUpdate request)
+    {
+        ToDoEntity? entity = await _dbContext.ToDos.FindAsync(request.ToDoId);
+
+        if (entity?.Owner != _userId)
+            return false;
+
+        entity.ToDoId = request.ToDoId;
+        entity.QuestId = request.NewQuestId;
+
+        int numberOfChanges = await _dbContext.SaveChangesAsync();
+
+        return numberOfChanges == 1;
+    }
+
 }

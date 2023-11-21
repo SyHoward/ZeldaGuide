@@ -51,5 +51,17 @@ public class ToDoController : ControllerBase
             : NotFound();
     }
 
+    //PUT api/ToDo
+    [HttpPut]
+    public async Task<IActionResult> UpdateToDoById([FromBody] ToDoUpdate request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return await _toDoService.UpdateToDoAsync(request)
+        ? Ok("ToDo updated successfully.")
+        : BadRequest("ToDo could not be updated.");
+    }
+
 }
 
