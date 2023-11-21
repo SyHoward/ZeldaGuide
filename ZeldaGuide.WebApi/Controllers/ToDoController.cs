@@ -63,5 +63,14 @@ public class ToDoController : ControllerBase
         : BadRequest("ToDo could not be updated.");
     }
 
+    //DELETE api/ToDo/{id}
+    [HttpDelete("{toDoId:int}")]
+    public async Task<IActionResult> DeleteToDo([FromRoute] int toDoId)
+    {
+        return await _toDoService.DeleteToDoAsync(toDoId)
+            ? Ok($"ToDo {toDoId} was deleted successfully.")
+            : BadRequest($"ToDo {toDoId} could not be deleted.");
+    }
+
 }
 

@@ -8,4 +8,5 @@ public interface IToDoService
     Task<IEnumerable<ToDoListItem>> GetAllToDoAsync();
     Task<ToDoDetail?> GetToDoByIdAsync(int noteId);
     Task<bool> UpdateToDoAsync(ToDoUpdate request);
+    Task<bool> DeleteToDoAsync(int toDoId);
 }

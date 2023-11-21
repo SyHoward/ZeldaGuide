@@ -93,4 +93,15 @@ public class ToDoService : IToDoService
         return numberOfChanges == 1;
     }
 
+    public async Task<bool> DeleteToDoAsync(int toDoId)
+    {
+        var toDoEntity = await _dbContext.ToDos.FindAsync(toDoId);
+
+        if (toDoEntity?.Owner != _userId)
+            return false;
+
+        _dbContext.ToDos.Remove(toDoEntity);
+        return await _dbContext.SaveChangesAsync() == 1;
+    }
+
 }
