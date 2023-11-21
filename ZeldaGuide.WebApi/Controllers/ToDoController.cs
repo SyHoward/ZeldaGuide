@@ -51,5 +51,26 @@ public class ToDoController : ControllerBase
             : NotFound();
     }
 
+    //PUT api/ToDo
+    [HttpPut]
+    public async Task<IActionResult> UpdateToDoById([FromBody] ToDoUpdate request)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return await _toDoService.UpdateToDoAsync(request)
+        ? Ok("ToDo updated successfully.")
+        : BadRequest("ToDo could not be updated.");
+    }
+
+    //DELETE api/ToDo/{id}
+    [HttpDelete("{toDoId:int}")]
+    public async Task<IActionResult> DeleteToDo([FromRoute] int toDoId)
+    {
+        return await _toDoService.DeleteToDoAsync(toDoId)
+            ? Ok($"ToDo {toDoId} was deleted successfully.")
+            : BadRequest($"ToDo {toDoId} could not be deleted.");
+    }
+
 }
 

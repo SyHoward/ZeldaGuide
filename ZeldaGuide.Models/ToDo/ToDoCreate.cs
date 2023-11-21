@@ -8,5 +8,4 @@ public class ToDoCreate
 {
     [Required]
     public int NewQuestId {get; set;}
-    
 }
