@@ -12,8 +12,8 @@ using ZeldaGuide.Data;
 namespace ZeldaGuide.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231116010015_SideAdventureTable")]
-    partial class SideAdventureTable
+    [Migration("20231120235426_attemptOne")]
+    partial class attemptOne
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,17 +216,17 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int>("MainQuestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestId")
+                    b.Property<int>("Owner")
                         .HasColumnType("int");
 
                     b.HasKey("ToDoId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("MainQuestId");
 
-                    b.HasIndex("QuestId");
+                    b.HasIndex("Owner");
 
                     b.ToTable("ToDos");
                 });
@@ -363,21 +363,21 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
-                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "Owner")
+                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Quest")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("MainQuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Id")
+                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "User")
                         .WithMany()
-                        .HasForeignKey("QuestId")
+                        .HasForeignKey("Owner")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Id");
+                    b.Navigation("Quest");
 
-                    b.Navigation("Owner");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
