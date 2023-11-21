@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using ZeldaGuide.Services.Location;
 using ZeldaGuide.Models.Location;
-
-
-
+using static ZeldaGuide.Services.Location.Services.Location;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Location.Services.Location;
 
 namespace ZeldaGuide.WebApi.Controllers;
     
@@ -13,46 +14,37 @@ namespace ZeldaGuide.WebApi.Controllers;
 {
     private readonly LocationService _locationService;
 
-    public object context { get; private set; }
-
-    public LocationController(LocationService LocationService)
+    public LocationController(ILocationService locationService)
     {
-        _locationService = LocationService;
+        _locationService = locationService;
     }
 
     [HttpPost]
-    public Task<IActionResult> CreateLocation([FromBody] LocationDetail request, object ModelState, object GetLocationById)
+    public Task<IActionResult> CreateLocation([FromBody] LocationCreate model);
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
+            return BadRequest(ModelState);
         }
-            Context.Location.Addnew Location;
-            Location = model.Location;
-            GetLocationById = model.LocationId;
+        return BadRequest("Location could not be created.");
         }
 
-IActionResult BadRequestResult(object modelState)
+
+
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAllLocations()
+    {
+        var quests = await ILocationService.GetLocationAsync();
+        return Ok(Location);
+    }
+
+IActionResult Ok(object location)
 {
     throw new NotImplementedException();
 }
 
-
-
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetAllLocation()
-    {
-        var location = await _LocationService
-        GetAllLocationAsync();
-        return Ok(location);
-    }
-
-    private void GetAllLocationAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpPut]
+[HttpPut]
     [Route("{id}")]
     public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
     {
@@ -89,6 +81,3 @@ IActionResult BadRequestResult(object modelState)
     }
 }
 
-public class LocationDetail
-{
-}
