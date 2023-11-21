@@ -63,4 +63,19 @@ public class ToDoService : IToDoService
 
         return toDos;
     }
+
+    public async Task<ToDoDetail?> GetToDoByIdAsync(int toDoId)
+    {
+        ToDoEntity? entity = await _dbContext.ToDos
+            .FirstOrDefaultAsync(e =>
+                e.ToDoId == toDoId && e.Owner == _userId
+            );
+
+        return entity is null ? null : new ToDoDetail
+        {
+            ToDoId = entity.ToDoId,
+            QuestId = entity.QuestId
+        };
+    }
+
 }
