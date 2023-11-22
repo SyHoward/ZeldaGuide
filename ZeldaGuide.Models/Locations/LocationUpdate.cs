@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+namespace ZeldaGuide.Models.Locations;
 public class LocationUpdate
 {
     [Required]

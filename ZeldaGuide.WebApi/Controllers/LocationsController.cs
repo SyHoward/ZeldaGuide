@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using ZeldaGuide.Services.Location;
-using ZeldaGuide.Models.Location;
-using static ZeldaGuide.Services.Location.Services.Location;
-using Microsoft.AspNetCore.Http.HttpResults;
+using ZeldaGuide.Services.Locations;
+using ZeldaGuide.Models.Locations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Location.Services.Location;
+
 
 namespace ZeldaGuide.WebApi.Controllers;
     
@@ -12,7 +10,7 @@ namespace ZeldaGuide.WebApi.Controllers;
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
 {
-    private readonly LocationService _locationService;
+    private readonly ILocationService _locationService;
 
     public LocationController(ILocationService locationService)
     {
@@ -20,12 +18,10 @@ namespace ZeldaGuide.WebApi.Controllers;
     }
 
     [HttpPost]
-    public Task<IActionResult> CreateLocation([FromBody] LocationCreate model);
+    public Task<IActionResult> CreateLocation([FromBody] LocationCreate model)
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
-        }
         return BadRequest("Location could not be created.");
         }
 

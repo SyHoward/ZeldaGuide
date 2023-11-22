@@ -1,4 +1,4 @@
-namespace ZeldaGuide.Models.Location;
+namespace ZeldaGuide.Models.Locations;
 
 public class LocationListItem
 {

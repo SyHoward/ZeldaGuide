@@ -1,10 +1,12 @@
-namespace Location.Services.Location;
+using ZeldaGuide.Models.Locations;
+
+namespace ZeldaGuide.Services.Locations;
 
 public interface ILocationService
 {
-    Task<bool> CreateLocationAsync(ZeldaGuide.Models.Location.LocationCreate model);
+    Task<bool> CreateLocationAsync(LocationCreate model);
     Task<LocationDetail?> GetLocationByIdAsync(int questId);
-    Task<IEnumerable<LocationListItem> GetLocationByAsync();
+//    Task<IEnumerable<LocationListItem> GetLocationByAsync();
     Task<bool> UpdateLocationAsync(LocationUpdate request);
     Task<bool> DeleteLocationAsync(int questId);
 }
