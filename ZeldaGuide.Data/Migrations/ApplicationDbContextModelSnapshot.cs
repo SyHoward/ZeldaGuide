@@ -184,11 +184,11 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.SideAdventureEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdventureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdventureId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -200,7 +200,7 @@ namespace ZeldaGuide.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdventureId");
 
                     b.ToTable("SideAdventures");
                 });
@@ -213,7 +213,10 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int>("AdventureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Owner")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestId")
@@ -221,7 +224,9 @@ namespace ZeldaGuide.Data.Migrations
 
                     b.HasKey("ToDoId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("AdventureId");
+
+                    b.HasIndex("Owner");
 
                     b.HasIndex("QuestId");
 
@@ -360,21 +365,29 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
-                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "Owner")
+                    b.HasOne("ZeldaGuide.Data.Entities.SideAdventureEntity", "Adventure")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("AdventureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Id")
+                    b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("Owner")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Quest")
                         .WithMany()
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Id");
+                    b.Navigation("Adventure");
 
-                    b.Navigation("Owner");
+                    b.Navigation("Quest");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

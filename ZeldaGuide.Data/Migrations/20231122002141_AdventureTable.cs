@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ZeldaGuide.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ToDoTable : Migration
+    public partial class AdventureTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,20 @@ namespace ZeldaGuide.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MainQuests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SideAdventures",
+                columns: table => new
+                {
+                    AdventureId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SideAdventures", x => x.AdventureId);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,8 +195,9 @@ namespace ZeldaGuide.Data.Migrations
                 {
                     ToDoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
-                    QuestId = table.Column<int>(type: "int", nullable: false)
+                    Owner = table.Column<int>(type: "int", nullable: false),
+                    QuestId = table.Column<int>(type: "int", nullable: false),
+                    AdventureId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,8 +209,14 @@ namespace ZeldaGuide.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ToDos_Users_OwnerId",
-                        column: x => x.OwnerId,
+                        name: "FK_ToDos_SideAdventures_AdventureId",
+                        column: x => x.AdventureId,
+                        principalTable: "SideAdventures",
+                        principalColumn: "AdventureId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ToDos_Users_Owner",
+                        column: x => x.Owner,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -229,9 +250,14 @@ namespace ZeldaGuide.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ToDos_OwnerId",
+                name: "IX_ToDos_AdventureId",
                 table: "ToDos",
-                column: "OwnerId");
+                column: "AdventureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDos_Owner",
+                table: "ToDos",
+                column: "Owner");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ToDos_QuestId",
@@ -277,6 +303,9 @@ namespace ZeldaGuide.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "MainQuests");
+
+            migrationBuilder.DropTable(
+                name: "SideAdventures");
 
             migrationBuilder.DropTable(
                 name: "Users");

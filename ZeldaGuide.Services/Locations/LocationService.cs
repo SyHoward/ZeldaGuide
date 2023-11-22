@@ -5,7 +5,7 @@ namespace ZeldaGuide.Services.Locations;
 
 public class LocationService : ILocationService
 {
-     private readonly Data.ApplicationDbContext? _dbContext;
+    private readonly Data.ApplicationDbContext? _dbContext;
     private readonly int _Location;
 
 

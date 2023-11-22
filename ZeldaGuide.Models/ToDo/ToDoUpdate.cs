@@ -1,13 +1,15 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace ZeldaGuide.Models.ToDo;
 
-public class ToDoCreate
+public class ToDoUpdate
 {
     [Required]
-    public int NewQuestId {get; set;}
+    public int ToDoId { get; set; }
 
+    [Required]
+    public int NewQuestId { get; set; }
+
+    [Required]
     public int NewAdventureId {get; set;}
 }

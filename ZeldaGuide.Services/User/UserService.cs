@@ -4,11 +4,13 @@ using ZeldaGuide.Data.Entities;
 using ZeldaGuide.Models.User;
 
 namespace ZeldaGuide.Services.User;
+
 public class UserService : IUserService
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<UserEntity> _userManager;
     private readonly SignInManager<UserEntity> _signInManager;
+    
     public UserService(ApplicationDbContext context,
                         UserManager<UserEntity> userManager,
                         SignInManager<UserEntity> signInManager)
