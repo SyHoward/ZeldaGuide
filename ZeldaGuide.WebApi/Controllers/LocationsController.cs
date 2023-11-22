@@ -1,92 +1,63 @@
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.CodeAnalysis.CSharp;
-// using ZeldaGuide.Services.Location;
-// using Microsoft.EntityFrameworkCore;
-// using Location.Services.Location;
 
-// namespace ZeldaGuide.WebApi.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using ZeldaGuide.Services.Locations;
+using ZeldaGuide.Models.Locations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace ZeldaGuide.WebApi.Controllers;    
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class LocationController : ControllerBase
+{
+    private readonly ILocationService _locationService;
+
+    public LocationController(ILocationService locationService)
+    {
+        _locationService = locationService;
+    }
+
+    [HttpPost]
+    public Task<IActionResult> CreateLocation([FromBody] LocationCreate model)
+    {
+        if (!ModelState.IsValid)
+        {
+        return BadRequest("Location could not be created.");
+        }
+
+
+
     
-//     [ApiController]
-//     [Route("api/[controller]")]
-//     public class LocationController : ControllerBase
-// {
-//     private readonly LocationService _locationService;
+    [HttpGet]
+    public async Task<IActionResult> GetAllLocations()
+    {
+        var quests = await ILocationService.GetLocationAsync();
+        return Ok(Location);
+    }
 
-//     public object context { get; private set; }
+IActionResult Ok(object location)
+{
+    throw new NotImplementedException();
+}
 
-//     public LocationController(LocationService LocationService)
-//     {
-//         _locationService = LocationService;
-//     }
+[HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
+    {
+        var oldLocation = await context.Location.FindAsync(id);
+        if (oldLocation == null)
+        {
+            return NotFound();
+        }
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-//     [HttpPost]
-//     public Task<IActionResult> PostLocation([FromBody] LocationDetail request, object ModelState)
-//     {
-//         if (ModelState.IsValid)
-//         {
-//             return Task.FromResult<IActionResult>(BadRequestResult(ModelState));
-//         }
-//             Context.Location.Addnew Location
-//             Location = model.Location,
-//             GetLocationById = model.LocationId,
-//         }
 
-// IActionResult BadRequestResult(object modelState)
-// {
-//     throw new NotImplementedException();
-// }
+        context.Location.Remove(location);
+        await context.SaveChangesAsync();
+        return Ok();
+    }
+}
 
-// public class LocationCreate
-//         {
-//         }
-    
-
-//     [HttpGet("{id:int}")]
-//     public async Task<IActionResult> GetAllLocation()
-//     {
-//         var location = await _locationService
-//         GetAllLocationAsync();
-//         return Ok(location);
-//     }
-
-//     private void GetAllLocationAsync()
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     [HttpPut]
-//     [Route("{id}")]
-//     public async Task<IActionResult> UpdateLocation([FromForm] LocationCreate request)
-//     {
-//         var oldLocation = await context.Location.FindAsync(id);
-//         if (oldLocation == null)
-//         {
-//             return NotFound();
-//         }
-//         if (!ModelState.IsValid)
-//         {
-//             return BadRequest(ModelState);
-//         }
-
-//         if (!string.IsNullOrEmpty(model.Name))
-//         {
-//             oldLocation.Name = model.Name;
-//         }
-        
-//     }
-//     [HttpDelete]
-//     [Route("{id}")]
-
-//     public async Task<IActionResult> DeleteLocation([FromRoute] int id)
-//     {
-//         var location = await context.Location.FindAsync(id);
-//         if (location is null)
-//         {
-//             return NotFound();
-//         }
-
-//         context.Location.Remove(location);
-//         await context.SaveChangesAsync();
-//         return Ok();
-//     }
-// }
