@@ -9,4 +9,7 @@ public class ToDoUpdate
 
     [Required]
     public int NewQuestId { get; set; }
+
+    [Required]
+    public int NewAdventureId {get; set;}
 }

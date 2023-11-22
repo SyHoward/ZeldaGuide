@@ -12,8 +12,8 @@ using ZeldaGuide.Data;
 namespace ZeldaGuide.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231120235426_attemptOne")]
-    partial class attemptOne
+    [Migration("20231122002141_AdventureTable")]
+    partial class AdventureTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,11 +187,11 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.SideAdventureEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdventureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdventureId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -203,7 +203,7 @@ namespace ZeldaGuide.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdventureId");
 
                     b.ToTable("SideAdventures");
                 });
@@ -216,17 +216,22 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
-                    b.Property<int>("MainQuestId")
+                    b.Property<int>("AdventureId")
                         .HasColumnType("int");
 
                     b.Property<int>("Owner")
                         .HasColumnType("int");
 
+                    b.Property<int>("QuestId")
+                        .HasColumnType("int");
+
                     b.HasKey("ToDoId");
 
-                    b.HasIndex("MainQuestId");
+                    b.HasIndex("AdventureId");
 
                     b.HasIndex("Owner");
+
+                    b.HasIndex("QuestId");
 
                     b.ToTable("ToDos");
                 });
@@ -363,9 +368,9 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
-                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Quest")
+                    b.HasOne("ZeldaGuide.Data.Entities.SideAdventureEntity", "Adventure")
                         .WithMany()
-                        .HasForeignKey("MainQuestId")
+                        .HasForeignKey("AdventureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -374,6 +379,14 @@ namespace ZeldaGuide.Data.Migrations
                         .HasForeignKey("Owner")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ZeldaGuide.Data.Entities.MainQuestEntity", "Quest")
+                        .WithMany()
+                        .HasForeignKey("QuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adventure");
 
                     b.Navigation("Quest");
 

@@ -32,7 +32,8 @@ public class ToDoService : IToDoService
         ToDoEntity entity = new()
         {
             Owner = _userId,
-            QuestId = request.NewQuestId
+            QuestId = request.NewQuestId,
+            AdventureId = request.NewAdventureId,
         };
 
         _dbContext.ToDos.Add(entity);
@@ -57,7 +58,8 @@ public class ToDoService : IToDoService
             .Select(entity => new ToDoListItem
             {
                 ToDoId = entity.ToDoId,
-                QuestId = entity.QuestId
+                QuestId = entity.QuestId,
+                AdventureId = entity.AdventureId
             })
             .ToListAsync();
 
@@ -74,7 +76,8 @@ public class ToDoService : IToDoService
         return entity is null ? null : new ToDoDetail
         {
             ToDoId = entity.ToDoId,
-            QuestId = entity.QuestId
+            QuestId = entity.QuestId,
+            AdventureId = entity.AdventureId,
         };
     }
 
@@ -87,6 +90,7 @@ public class ToDoService : IToDoService
 
         entity.ToDoId = request.ToDoId;
         entity.QuestId = request.NewQuestId;
+        entity.AdventureId = request.NewAdventureId;
 
         int numberOfChanges = await _dbContext.SaveChangesAsync();
 
