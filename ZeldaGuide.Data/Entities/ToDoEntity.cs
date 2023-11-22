@@ -18,4 +18,8 @@ public class ToDoEntity
     public int QuestId {get; set;}
     public virtual MainQuestEntity Quest {get; set;}
 
+    [Required]
+    [ForeignKey(nameof(Adventure))]
+    public int AdventureId {get; set;}
+    public virtual SideAdventureEntity Adventure {get; set;}
 }

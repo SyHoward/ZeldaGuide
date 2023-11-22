@@ -213,6 +213,9 @@ namespace ZeldaGuide.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
 
+                    b.Property<int>("AdventureId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Owner")
                         .HasColumnType("int");
 
@@ -220,6 +223,8 @@ namespace ZeldaGuide.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ToDoId");
+
+                    b.HasIndex("AdventureId");
 
                     b.HasIndex("Owner");
 
@@ -360,6 +365,12 @@ namespace ZeldaGuide.Data.Migrations
 
             modelBuilder.Entity("ZeldaGuide.Data.Entities.ToDoEntity", b =>
                 {
+                    b.HasOne("ZeldaGuide.Data.Entities.SideAdventureEntity", "Adventure")
+                        .WithMany()
+                        .HasForeignKey("AdventureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ZeldaGuide.Data.Entities.UserEntity", "User")
                         .WithMany()
                         .HasForeignKey("Owner")
@@ -371,6 +382,8 @@ namespace ZeldaGuide.Data.Migrations
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Adventure");
 
                     b.Navigation("Quest");
 
